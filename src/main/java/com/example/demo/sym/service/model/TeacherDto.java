@@ -8,5 +8,5 @@ import lombok.Data;
 
 @Data @Component
 public class TeacherDto{
-
+    private String teaNum,name,password, subject;
 }
