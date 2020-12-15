@@ -3,6 +3,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.cmm.mpr.TeacherMapper">
   <insert id="insert" parameterType="com.example.demo.sym.service.model.TeacherDto">
-   insert into teachers(name,password,subject) values(#{name},#{password},#{subject})
+   insert into teachers(name,password,subject,ssn) values(#{name},#{password},#{subject},#{ssn})
    </insert>
-</mapper>
+   <select id="selectAll" resultType="com.example.demo.sym.service.model.TeacherDto">
+    select tea_num teaNum, name,password, subject, profile_image profileImage, ssn
+    from teachers
+   </select>
+</mapper> 
