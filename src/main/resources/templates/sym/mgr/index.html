@@ -596,56 +596,54 @@
 	<script src="/mgr/js/app.js"></script>
 	<script>
 		$('#teachers').click(e=>{
-			alert(`click`)
 			$.getJSON(`/teachers`,d=>{
 				alert(`강사 수: ${d.length}`)
 				let tr=''
-				if(c.length != 0){
+				if(d.length != 0){
 					let i = 0 
 					for(; i<d.length; i++){
 						tr +='<tr>'
 							+ `<th>${d[i].teaNum}</th>`
-							// + `<th>${d[i].userid} </th>`
-							+ `<th>${d[i].name}</th>`
-							+ `<th>${d[i].ssn} </th>`
-							// + `<th>${d[i].regdate} </th>`
+							+ `<th><a href="#" class="names" id="${d[i].teaNum}">${d[i].name}</a> </th>`
+							+ `<th>${d[i].email}</th>`
 							+ `<th>${d[i].subject} </th>`
 							+'</tr>'
 						}
 					} else{
-						tr = '<td colspan="6"> 조회내용이 없습니다 </td>'
+						tr = '<td colspan="4"> 조회내용이 없습니다 </td>'
 					}
-				})
+				
 		
 			$(`main`).html(`<h2>교강사 목록</h2>
 							<table>
 							<thead>
 							<tr>
 								<th>강사번호</th>
-								<th>아이디</th>
 								<th>이름</th>
-								<th>생년월일</th>
-								<th>등록일</th>
+								<th>이메일</th>
 								<th>담당과목</th>
 							</tr>
 							</thead>
 							<tbody>
-								
+								${tr}
 							</tbody>
 							</table>
 					`)
+					$('.names').each(function(i){
+					$(this).click(e=>{
+						localStorage.setItem(`searchTeacher`,`${this.id}`)
+						location.href =`/transfer/sym/tea/teacher`
+					})
+				})
+					
 						
 		})
+	})
 	
 	</script>
-	<script>
-			
-		
+	<script>	
 			
 			$('#students').click( e => {
-			alert(`click !!`)
-			
-			
 			$.getJSON(`/students`, d => {
 				alert(`학생수 : ${d.length}`)
 				let tr = ''
